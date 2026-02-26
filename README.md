@@ -13,12 +13,29 @@ These instructions are written for a junior developer or AI agent so that each s
 - `create-prd.md` — Rules for interviewing the requester, collecting missing context, drafting the PRD, and saving it to `/tasks/`.
 - `generate-tasks.md` — Guidelines for turning a completed PRD into an actionable task list, including the mandated two-phase (parent tasks → sub-tasks) workflow.
 - `process-task-list.md` — Execution rules for keeping task lists up to date while implementation is in progress, including when to run tests and how to commit changes.
+- `agents.md` — Agent definitions aligned to the workflow stages.
+- `skills/` — Skill definitions that translate the workflow into operational steps.
 
 ## Recommended Workflow
 1. **Capture the feature idea.** Point the AI assistant to `create-prd.md` and provide the initial feature prompt. The assistant must ask clarifying questions before producing the PRD.
 2. **Generate the PRD.** After the clarifications are answered, the assistant writes the PRD using the structure in `create-prd.md` and saves it under `/tasks/` with the required naming convention.
 3. **Plan implementation tasks.** Reference `generate-tasks.md` with the PRD filename. The assistant reviews the repository, proposes high-level tasks, pauses for confirmation, then expands each task into sub-tasks and enumerates relevant files.
 4. **Execute the plan.** During development, follow `process-task-list.md` to work through sub-tasks sequentially, update completion status, and run tests before marking parent tasks complete.
+
+## Agent and Skill Mapping
+- **PRD Interviewer Agent:** `skills/skill-prd-interview.md`
+- **PRD Writer Agent:** `skills/skill-prd-drafting.md`
+- **Task Planning Agent:** `skills/skill-task-planning-phase-1.md`, `skills/skill-task-planning-phase-2.md`, `skills/skill-relevant-files.md`
+- **Task Execution Agent:** `skills/skill-subtask-execution.md`, `skills/skill-parent-task-closeout.md`
+- **Task List Governance Agent:** `skills/skill-task-list-maintenance.md`
+- **Model routing:** `skills/skill-model-routing.md`
+
+## How to Use Agents and Skills
+1. Start with the agent that matches your current stage (see mapping above).
+2. Use the corresponding skill document as the operational checklist and prompt template.
+3. Follow the rules in the skill file exactly, especially the "Go" confirmation step and closeout protocol.
+4. Keep artifacts in `/tasks/` and update task lists after each sub-task.
+5. If unsure which model to use, apply `skills/skill-model-routing.md`.
 
 ## Usage Tips
 - Keep all generated artifacts inside the `/tasks/` directory so history remains ordered and easy to track.
