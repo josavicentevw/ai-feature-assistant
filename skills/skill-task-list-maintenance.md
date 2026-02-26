@@ -11,6 +11,12 @@ Keep the task list and relevant files accurate throughout execution.
 - Updated task list with completed items marked.
 - Updated `Relevant Files` section.
 
+## Mode
+- autonomous
+
+## Handoff
+- Maintains authoritative task list for the next execution step.
+
 ## Rules
 - Mark each sub-task `[x]` immediately when finished.
 - Mark parent tasks only after all sub-tasks and closeout protocol complete.

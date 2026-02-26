@@ -9,6 +9,12 @@ Gather enough context before drafting a PRD.
 ## Outputs
 - A list of clarifying questions with numbered or lettered options.
 
+## Mode
+- supervised (waits for user answers).
+
+## Handoff
+- Writes interview answers to `/tasks/` context notes for PRD drafting.
+
 ## Rules
 - Ask questions before writing the PRD.
 - Focus on what and why, not how.

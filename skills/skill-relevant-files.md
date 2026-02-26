@@ -10,6 +10,12 @@ List files likely to be created or modified to implement the plan.
 ## Outputs
 - `Relevant Files` section with exact paths and reasons.
 
+## Mode
+- autonomous
+
+## Handoff
+- Supplies the `Relevant Files` section to task planning.
+
 ## Rules
 - Include likely test files.
 - Use existing repo conventions.

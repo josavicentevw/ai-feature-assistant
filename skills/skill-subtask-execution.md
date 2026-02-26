@@ -10,6 +10,12 @@ Implement a single sub-task and update the task list.
 - Code changes in the repo.
 - Task list updated with the sub-task marked `[x]`.
 
+## Mode
+- supervised (waits for "yes"/"y" per sub-task).
+
+## Handoff
+- Updates repo state and task list for governance.
+
 ## Rules
 - One sub-task at a time.
 - Ask for user permission before starting the next sub-task ("yes" or "y").

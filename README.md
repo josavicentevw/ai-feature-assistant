@@ -37,6 +37,40 @@ These instructions are written for a junior developer or AI agent so that each s
 4. Keep artifacts in `/tasks/` and update task lists after each sub-task.
 5. If unsure which model to use, apply `skills/skill-model-routing.md`.
 
+## Hybrid Mode (Autonomy)
+Hybrid mode is the default. It runs autonomously except for three required human checkpoints:
+
+- After PRD interview questions (waits for answers).
+- After task planning phase 1 (waits for "Go").
+- After each sub-task execution (waits for "yes"/"y").
+
+All other stages run without pauses using the rules in each skill file.
+
+## Tooling Notes
+- Use the skill files as operational checklists and prompt templates.
+- Use `/tasks/` for all generated artifacts (PRDs, task lists, interview notes).
+- The task planning workflow enforces the two-phase parent tasks → sub-tasks flow.
+- The execution workflow enforces test and commit rules before closing parent tasks.
+
+## Examples
+
+### Example: From Feature Idea to PRD
+1. Start the **PRD Interviewer Agent** with `skills/skill-prd-interview.md`.
+2. Ask clarifying questions and wait for answers.
+3. Run the **PRD Writer Agent** with `skills/skill-prd-drafting.md` to produce `/tasks/0001-prd-<feature>.md`.
+
+### Example: Generate Tasks from a PRD
+1. Run **Task Planning Phase 1** with `skills/skill-task-planning-phase-1.md`.
+2. Wait for user "Go".
+3. Run **Task Planning Phase 2** with `skills/skill-task-planning-phase-2.md` and include `skills/skill-relevant-files.md`.
+4. Save the final task list as `/tasks/tasks-0001-prd-<feature>.md`.
+5. Always reference the relevant PRD when writing or updating tasks.
+
+### Example: Execute a Sub-Task
+1. Run **Sub-Task Execution** with `skills/skill-subtask-execution.md` for the next unchecked sub-task.
+2. Update the task list and wait for "yes"/"y".
+3. When all sub-tasks under a parent task are done, run **Parent Task Closeout** with `skills/skill-parent-task-closeout.md`.
+
 ## Usage Tips
 - Keep all generated artifacts inside the `/tasks/` directory so history remains ordered and easy to track.
 - When collaborating with a human teammate, share the generated PRD and task list early to confirm scope before development begins.

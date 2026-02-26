@@ -12,6 +12,12 @@ Close a parent task following the testing and commit protocol.
 - Commit created with conventional format.
 - Parent task marked completed.
 
+## Mode
+- autonomous
+
+## Handoff
+- Confirms parent task completion for governance.
+
 ## Rules
 - Run the full test suite before committing.
 - If tests fail, stop and report.

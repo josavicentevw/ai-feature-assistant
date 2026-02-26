@@ -11,6 +11,12 @@ Write a complete PRD from the prompt and answers.
 - A Markdown PRD with all required sections.
 - File saved in `/tasks/` as `[n]-prd-[feature-name].md` (4-digit sequence).
 
+## Mode
+- autonomous
+
+## Handoff
+- Produces the PRD file for task planning.
+
 ## Rules
 - Use the required PRD structure.
 - Number all functional requirements.

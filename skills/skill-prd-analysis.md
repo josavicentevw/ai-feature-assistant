@@ -12,6 +12,12 @@ Extract requirements, stories, criteria, and risks from an existing PRD.
 - Success metrics and open questions.
 - List of ambiguities or risks.
 
+## Mode
+- autonomous
+
+## Handoff
+- Feeds PRD insights into task planning.
+
 ## Rules
 - Do not propose implementations.
 - Preserve the PRD's language and intent.

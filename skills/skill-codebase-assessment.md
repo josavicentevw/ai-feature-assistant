@@ -11,6 +11,12 @@ Identify existing components, patterns, and files relevant to the PRD.
 - List of relevant files/components with short notes.
 - Notes on patterns, conventions, and dependencies.
 
+## Mode
+- autonomous
+
+## Handoff
+- Provides repo context for task planning.
+
 ## Rules
 - Do not propose changes yet.
 - Use exact existing paths.

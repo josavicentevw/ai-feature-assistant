@@ -12,6 +12,12 @@ Expand parent tasks into detailed sub-tasks and assemble the final task list.
 - Sub-tasks under each parent task.
 - Final task list with `Relevant Files` and `Notes` sections.
 
+## Mode
+- autonomous
+
+## Handoff
+- Writes the final task list to `/tasks/` for execution.
+
 ## Rules
 - Keep sub-tasks clear and actionable.
 - Cover the full PRD scope.

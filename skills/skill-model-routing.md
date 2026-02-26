@@ -11,6 +11,12 @@ Select the best model for each workflow stage and context.
 - Recommended model for the stage.
 - Brief rationale.
 
+## Mode
+- autonomous
+
+## Handoff
+- Provides model choice to the next skill or agent.
+
 ## Rules
 - Prioritize instruction and format fidelity for PRD and planning.
 - Prioritize cost and latency for interviews.

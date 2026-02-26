@@ -4,29 +4,22 @@ This directory contains the operational skills that implement the workflow defin
 
 ## Workflow Order
 
-1. **Model routing**
-   - `skills/skill-model-routing.md`
-2. **PRD interview**
-   - `skills/skill-prd-interview.md`
-3. **PRD drafting**
-   - `skills/skill-prd-drafting.md`
-4. **PRD analysis**
-   - `skills/skill-prd-analysis.md`
-5. **Codebase assessment**
-   - `skills/skill-codebase-assessment.md`
-6. **Task planning phase 1 (parent tasks)**
-   - `skills/skill-task-planning-phase-1.md`
-7. **Task planning phase 2 (sub-tasks + relevant files)**
-   - `skills/skill-task-planning-phase-2.md`
-8. **Sub-task execution**
-   - `skills/skill-subtask-execution.md`
-9. **Parent task closeout**
-   - `skills/skill-parent-task-closeout.md`
-10. **Task list maintenance**
-   - `skills/skill-task-list-maintenance.md`
+| Order | Skill | Mode |
+| --- | --- | --- |
+| 1 | `skills/skill-model-routing.md` | autonomous |
+| 2 | `skills/skill-prd-interview.md` | supervised (waits for answers) |
+| 3 | `skills/skill-prd-drafting.md` | autonomous |
+| 4 | `skills/skill-prd-analysis.md` | autonomous |
+| 5 | `skills/skill-codebase-assessment.md` | autonomous |
+| 6 | `skills/skill-task-planning-phase-1.md` | supervised (waits for "Go") |
+| 7 | `skills/skill-task-planning-phase-2.md` | autonomous |
+| 8 | `skills/skill-subtask-execution.md` | supervised (waits for "yes"/"y") |
+| 9 | `skills/skill-parent-task-closeout.md` | autonomous |
+| 10 | `skills/skill-task-list-maintenance.md` | autonomous |
 
 ## Notes
 
 - Skills are written to be used by agents defined in `agents.md`.
 - The task planning skills enforce the two-phase "Go" confirmation step.
 - The execution and closeout skills enforce the test and commit protocol.
+- Hybrid mode keeps the three required pauses: answers, "Go", and per-sub-task approval.
