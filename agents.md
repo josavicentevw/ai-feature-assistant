@@ -1,46 +1,71 @@
-# Agent Definitions
+# AI Feature Assistant
 
-## PRD Interviewer Agent
-- **Objective:** Capture the initial prompt, ask mandatory clarifying questions, and consolidate context.
-- **Inputs:** User feature prompt.
-- **Outputs:** A list of questions with enumerated options.
-- **Key rules:** Ask before drafting the PRD; focus on what and why.
-- **Style:** Clear, jargon-free questions ordered by scope impact.
-- **Autonomy:** supervised (waits for user answers).
-- **Handoff:** Writes interview responses to `/tasks/` context notes for the PRD Writer Agent.
+## Overview
+This project uses a structured workflow to go from feature ideas to implemented
+code. The workflow has three stages with three mandatory human checkpoints.
 
-## PRD Writer Agent
-- **Objective:** Draft the PRD in Markdown using the required structure.
-- **Inputs:** Initial prompt + user answers.
-- **Outputs:** PRD at `/tasks/[n]-prd-[feature-name].md`.
-- **Key rules:** Use required sections; write for a junior developer.
-- **Style:** Short sentences, numbered requirements, no ambiguity.
-- **Autonomy:** autonomous.
-- **Handoff:** Produces the PRD file for the Task Planning Agent.
+## Workflow Stages
+1. **PRD Creation** -- Interview the user (ALWAYS ask clarifying questions
+   first), then draft a Product Requirements Document.
+2. **Task Planning** -- Analyze PRD, generate parent tasks (pause for "Go"),
+   then expand into sub-tasks.
+3. **Task Execution** -- Implement one sub-task at a time (pause per sub-task
+   for user approval).
 
-## Task Planning Agent
-- **Objective:** Convert the PRD into a two-phase task plan.
-- **Inputs:** Specific PRD and repo state.
-- **Outputs:** `tasks-[prd-file-name].md` in `/tasks/`.
-- **Key rules:** Phase 1 parent tasks; pause for "Go"; Phase 2 sub-tasks + relevant files.
-- **Style:** Actionable tasks ordered by dependencies and repo conventions.
-- **Autonomy:** hybrid (phase 1 supervised, phase 2 autonomous).
-- **Handoff:** Produces the task list file for the Task Execution Agent.
+## Mandatory Human Checkpoints
+These checkpoints are non-negotiable. The agent MUST stop and wait.
 
-## Task Execution Agent
-- **Objective:** Implement sub-tasks one at a time using the protocol.
-- **Inputs:** Task list and current sub-task.
-- **Outputs:** Repo changes + updated task list.
-- **Key rules:** One sub-task at a time; ask for permission to continue.
-- **Style:** Minimal changes; explain why after each sub-task.
-- **Autonomy:** supervised (per sub-task approval).
-- **Handoff:** Updates task list and repo state for Task List Governance Agent.
+1. **After PRD interview questions** -- Wait for the user to answer every
+   clarifying question before drafting the PRD. NEVER skip this step.
+2. **After task planning phase 1** -- Present parent tasks and wait for the
+   user to say "Go" before generating sub-tasks.
+3. **After each sub-task execution** -- Wait for the user to say "yes" or "y"
+   before proceeding to the next sub-task.
 
-## Task List Governance Agent
-- **Objective:** Keep the task list accurate and consistent.
-- **Inputs:** Current progress and changes made.
-- **Outputs:** Task list with `[x]` updates and `Relevant Files` updated.
-- **Key rules:** Update after each sub-task.
-- **Style:** Precise, verifiable; no invented paths.
-- **Autonomy:** autonomous.
-- **Handoff:** Maintains the authoritative task list for the next execution step.
+## Artifact Conventions
+- PRD files: `/tasks/[n]-prd-[feature-name].md` (n = 4-digit zero-padded
+  sequence starting from 0001)
+- Task lists: `/tasks/tasks-[prd-file-name].md`
+- All generated artifacts go in `/tasks/`
+
+## Agent-Skill Mapping
+
+| Agent | Skills Used |
+|-------|-------------|
+| prd-interviewer | `prd-interview`, `prd-drafting` |
+| prd-writer | `prd-drafting` |
+| task-planner | `prd-analysis`, `codebase-assessment`, `task-planning-phase-1`, `task-planning-phase-2`, `relevant-files` |
+| task-executor | `subtask-execution`, `parent-task-closeout` |
+| task-governance | `task-list-maintenance` |
+
+## Commit Protocol
+When all sub-tasks under a parent task are complete:
+1. Run full test suite.
+2. Only if tests pass: stage changes (`git add .`).
+3. Remove temporary files and temporary code.
+4. Commit with conventional format using multiple `-m` flags.
+5. Reference the task number and PRD context in the commit message.
+
+## Critical Rule: PRD Interview
+The PRD Interviewer agent MUST ALWAYS ask clarifying questions before drafting
+a PRD. This rule cannot be bypassed. The agent must cover:
+- Problem/Goal
+- Target User
+- Core Actions
+- User Stories
+- Acceptance Criteria
+- Scope/Non-Goals
+- Data Requirements
+- Design/UI
+- Edge Cases
+
+Questions must use numbered or lettered options for quick user responses.
+
+## Quick Start Commands
+- `/create-prd <feature idea>` -- Start the PRD workflow
+- `/generate-tasks <prd-file>` -- Generate tasks from a PRD
+- `/process-tasks <task-list-file>` -- Begin executing tasks
+
+## External File Loading
+When working on PRD creation or task planning, load the relevant skill using
+the `skill` tool. Skills contain the operational checklists for each stage.
