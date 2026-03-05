@@ -22,13 +22,13 @@ These instructions are written for a junior developer or AI agent so that each s
 3. **Plan implementation tasks.** Reference `generate-tasks.md` with the PRD filename. The assistant reviews the repository, proposes high-level tasks, pauses for confirmation, then expands each task into sub-tasks and enumerates relevant files.
 4. **Execute the plan.** During development, follow `process-task-list.md` to work through sub-tasks sequentially, update completion status, and run tests before marking parent tasks complete.
 
-## Agent and Skill Mapping
-- **PRD Interviewer Agent:** `skills/skill-prd-interview.md`
-- **PRD Writer Agent:** `skills/skill-prd-drafting.md`
-- **Task Planning Agent:** `skills/skill-task-planning-phase-1.md`, `skills/skill-task-planning-phase-2.md`, `skills/skill-relevant-files.md`
-- **Task Execution Agent:** `skills/skill-subtask-execution.md`, `skills/skill-parent-task-closeout.md`
-- **Task List Governance Agent:** `skills/skill-task-list-maintenance.md`
-- **Model routing:** `skills/skill-model-routing.md`
+## Agents (who to run when)
+- **PRD Interviewer (primary):** Runs `skills/skill-prd-interview.md`, gathers clarifications with numbered questions, and calls the PRD Writer after answers are collected.
+- **PRD Writer (subagent):** Runs `skills/skill-prd-drafting.md` to produce the PRD Markdown once the interview is complete.
+- **Task Planner (primary):** Uses `skills/skill-prd-analysis.md`, `skills/skill-codebase-assessment.md`, `skills/skill-task-planning-phase-1.md` (pause for "Go"), `skills/skill-task-planning-phase-2.md`, and `skills/skill-relevant-files.md`.
+- **Task Executor (primary):** Uses `skills/skill-subtask-execution.md` (pause after every sub-task) and `skills/skill-parent-task-closeout.md`; can invoke Task Governance.
+- **Task Governance (subagent):** Uses `skills/skill-task-list-maintenance.md` to keep `Relevant Files` and checkboxes accurate.
+- **Model routing:** Start with `skills/skill-model-routing.md` when unsure which agent/skill to load.
 
 ## Skills Overview
 This directory contains the operational skills that implement the workflow defined in the root rules (`create-prd.md`, `generate-tasks.md`, `process-task-list.md`). Each skill is a small, focused unit that maps to one workflow stage.
